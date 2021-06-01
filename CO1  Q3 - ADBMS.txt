@@ -1,0 +1,95 @@
+Pre- Requisites
+-----------------------------------------------------------------------------------------------------------------------------------
+1. create database organization;
+2. use organization;
+3(a). CREATE TABLE employee (emp_no VARCHAR(20), emp_name VARCHAR(70), DOB VARCHAR(30), address VARCHAR(200),doj VARCHAR(20),mobile_no VARCHAR(15),dept_no VARCHAR(50),salary INT(10));
+3(b). CREATE TABLE department (dept_no VARCHAR(20), dept_name VARCHAR(70), location VARCHAR(200));
+4(a). ALTER TABLE employee ADD PRIMARY KEY (emp_no);
+4(b). ALTER TABLE department ADD PRIMARY KEY (dept_no);
+4(c). ALTER TABLE employee ADD FOREIGN KEY (dept_no) REFERENCES department(dept_no);
+5. ALTER TABLE employee ADD designation varchar(100);
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+1(a). 
+INSERT INTO department (dept_no,dept_name,location) VALUES ("DEPT101","SOFTWARE DEVELEOPMENT","KOCHI"),("DEPT102","INFRASTRUCTURE","RANNI"),("DEPT103","SOFTWARE TESTING","KOCHI"),("DEPT104","ACCOUNTING","TRIVANDRUM"),("DEPT105","HUMAN RESOURCE","KOCHI");
+1(b).
+INSERT INTO employee (emp_no,emp_name,DOB,address,doj,mobile_no,dept_no,salary,designation)
+VALUES
+    (
+        "EMP1000",
+        "Agna",
+        "21/5/99",
+        "Thrissur",
+	"1/5/21",
+	"98612332131",
+        "DEPT101",
+	2000,
+	"Software Developer"
+    ),
+    (
+        "EMP1001",
+        "John",
+        "12/7/99",
+        "Kochi",
+	"1/4/21",
+	"9861233270",
+        "DEPT102",
+	7000,
+	"Security Engineer"
+    ),
+    (
+        "EMP1002",
+        "Abhilash",
+        "10/7/98",
+        "Ranni",
+	"1/5/21",
+	"98612339988",
+        "DEPT102",
+	5000,
+	"Security Engineer"
+    ),
+    (
+        "EMP1003",
+        "Rasik",
+        "21/5/96",
+        "Kochi",
+	"1/3/21",
+	"9861233008",
+        "DEPT101",
+	25000,
+	"Software Engineer"
+    ),
+   (
+        "EMP1004",
+        "Shaad",
+        "1/5/98",
+        "Kozhikode",
+	"1/5/21",
+	"98612330009",
+        "DEPT104",
+	3000,
+	"Typist"
+    );
+
+2(a). select * from employee;
+2(b). select * from depatment;
+
+3. select emp_no,emp_name from employee where dept_no='DEPT102';
+
+4. select emp_no,emp_name,designation,dept_no,salary from employee order by salary desc;
+
+5. select * from employee where salary BETWEEN 2000 AND 5000;
+
+6. select distinct designation from employee; 
+
+7. select department.dept_name,SUM(employee.salary) from employee,department where employee.dept_no = department.dept_no GROUP BY employee.dept_no;
+
+8. UPDATE employee SET salary = 25000 WHERE designation = 'Typist';
+
+9. UPDATE employee SET mobile_no = '8989123456' WHERE emp_name='John';
+
+10. DELETE FROM employee WHERE salary=7000;
+
+11. select department.dept_name,SUM(employee.salary) from employee,department where employee.dept_no = department.dept_no GROUP BY employee.dept_no having SUM(employee.salary)>25000;
